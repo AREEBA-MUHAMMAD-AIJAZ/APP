@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const Cards = () => {
   const [data, setData] = useState();
   const [genresData, setGenresData] = useState("");
-
+  // console.log(data);
   let filterdData = data?.filter((val) =>
     genresData ? val.genres[0] == genresData : data
   );
@@ -36,16 +36,18 @@ const Cards = () => {
   return (
     <div className=" max-w-6xl mx-auto p-5 ">
       <div className="flex gap-5 text-black  text-3xl font-bold p-4" >
-           <button onClick={() => setGenresData("")}>All Categories</button>
+   {genresData &&
+
+    <button onClick={() => setGenresData("")}>All Categories</button>
+   }  
       </div>
       <ul className="flex gap-5 text-white bg-amber-200 text-xl font-bold p-3">
+
         <button onClick={() => setGenresData("Drama")}>Drama</button>
         <button onClick={() => setGenresData("Crime")}>Crime</button>
         <button onClick={() => setGenresData("Animation")}>Animation</button>
         <button onClick={() => setGenresData("Comedy")}>Comedy</button>
-        <button onClick={() => setGenresData("Sci-Fi & Fantasy")}>
-          Sci-Fi & Fantasy
-        </button>
+        <button onClick={() => setGenresData("Sci-Fi & Fantasy")}> Sci-Fi & Fantasy</button>
       </ul>
 
       <div className="grid grid-cols-5 gap-3 p-5">
@@ -80,22 +82,23 @@ const Cards = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* {_id}
-            {item.first_aired}
-            <div>
-            <img src={item.backdrop_path} alt="" />
-            </div> 
-            {item.original_title}
-          {item.overview} */}
-              </div>
+            </div>
             );
           })}
 
-        {/* <p>{data[0]._id}</p> */}
       </div>
     </div>
   );
 };
 
 export default Cards;
+
+ {/* {_id}
+            {item.first_aired}
+            <div>
+            <img src={item.backdrop_path} alt="" />
+            </div> 
+            {item.original_title}
+          {item.overview} */}
+                  {/* <p>{data[0]._id}</p> */}
+

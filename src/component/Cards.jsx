@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 
 const Cards = () => {
   const [data, setData] = useState();
-  // console.log(data);
+  const [genresData, setGenresData] = useState("");
+
+  let filterdData = data?.filter((val) =>
+    genresData ? val.genres[0] == genresData : data
+  );
 
   const options = async () => {
     try {
@@ -20,9 +24,9 @@ const Cards = () => {
       const response = await fetch(url, options);
       const result = await response.json();
       setData(result.movies);
-      // console.log("result",response);
+      // console.log("result", response);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
   useEffect(() => {
@@ -30,48 +34,60 @@ const Cards = () => {
   }, []);
 
   return (
-    <div className="bg-gray-900 max-w-6xl mx-auto">
+    <div className=" max-w-6xl mx-auto p-5 ">
+      <div className="flex gap-5 text-black  text-3xl font-bold p-4" >
+           <button onClick={() => setGenresData("")}>All Categories</button>
+      </div>
+      <ul className="flex gap-5 text-white bg-amber-200 text-xl font-bold p-3">
+        <button onClick={() => setGenresData("Drama")}>Drama</button>
+        <button onClick={() => setGenresData("Crime")}>Crime</button>
+        <button onClick={() => setGenresData("Animation")}>Animation</button>
+        <button onClick={() => setGenresData("Comedy")}>Comedy</button>
+        <button onClick={() => setGenresData("Sci-Fi & Fantasy")}>
+          Sci-Fi & Fantasy
+        </button>
+      </ul>
+
       <div className="grid grid-cols-5 gap-3 p-5">
-        {data &&
-          data.map((item, index) => {
-            const {backdrop_path,original_title,overview,first_aired}=item
+        {filterdData != undefined &&
+          filterdData.length > 0 &&
+          filterdData.map((item, index) => {
+            const {
+              backdrop_path,
+              original_title,
+              overview,
+              first_aired,
+              genres,
+            } = item;
+
             return (
               <div key={index}>
-                <div className="">
+                <div className="bg-white text-black rounded-xl shadow-2xl">
                   <div class="max-w-md rounded overflow-hidden ">
+
                     <img
-                      class="w-52 p-2 hover:p-1"
+                      class="w-52 p-2 hover:p-1 "
                       src={backdrop_path}
                       alt="Sunset in the mountains"
                     />
                     <div class="px-6 py-4 items-center">
-                      <div class="font-bold text-lg mb-2 text-white">
+                      <div class="font-bold text-lg mb-2 ">
                         {original_title}
-                       <p className="font-light text-sm"> {first_aired}</p> 
+                        <p className="font-light text-sm"> {first_aired}</p>
                       </div>
-
                       {/* <p class="text-gray-700 text-base"> {overview} </p> */}
+                      <p class="text-gray-700 text-base"> {genres} </p>
                     </div>
-                    {/* <div class="px-6 pt-4 pb-2">
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                        #photography
-                      </span>
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                        #travel
-                      </span>
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                        #winter
-                      </span>
-                    </div> */}
                   </div>
-                  {/* {_id}
+                </div>
+
+                {/* {_id}
             {item.first_aired}
             <div>
-              <img src={item.backdrop_path} alt="" />
+            <img src={item.backdrop_path} alt="" />
             </div> 
             {item.original_title}
-            {item.overview} */}
-                </div>
+          {item.overview} */}
               </div>
             );
           })}

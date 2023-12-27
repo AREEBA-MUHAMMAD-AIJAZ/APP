@@ -1,0 +1,34 @@
+Sbse phly API ka data ka data variable me aa rh h.
+....
+line 9 me genres is liye likha q k hm chahty h agr comedy pr click kre to comedy ki sari movies ajyn horror pr click kren to horror. is liye "data"  ko filter krwaya h k genre k array mme jo b pehli value h wo hhi dikhyn or agr koe nh h to data dikhyn.
+
+  const [showmore , setShowMore] = useState(4)
+ ye is liye q k 5 5 kr k cards show hon.
+
+
+ filterdData.map(item, index) => 
+            const {
+              backdrop_path,
+              original_title,
+              // overview,
+              first_aired,
+              genres,
+              _id
+            } = item;
+ ye ma ka function run hua h or phr hmny d structure kia . 
+
+
+ <Link href={`/${_id}`}>
+
+ ye is liye k is link k andr jo b card bna h us pr link lg jy. or click ho to next page pr chala jy or id get kr ra h  ye link..
+
+ ...............................
+
+  <div class="font-bold text-lg mb-2 ">
+                         {original_title}
+                         <p className="font-light text-sm"> {first_aired}</p>
+                       </div>
+
+
+                       yaha curly bracket me is liye use kr rh  h q k hmny phly hi usko dstructure krlia h, ab just nam use kr skty h
+                       

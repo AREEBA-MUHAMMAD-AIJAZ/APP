@@ -1,9 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import { UseState, UseEffect } from "react";
+import { UseParams } from "next/navigation";
 const page = () => {
-    const [data, setData] = useState();
-    const params = useParams();
+    const [data, setData] = UseState();
+    const params = UseParams();
     console.log(params);
 
     const options = async () => {
@@ -29,7 +29,7 @@ const page = () => {
         return item._id == params.movies;
     });
     console.log(filter);
-    useEffect(() => {
+    UseEffect(() => {
         options();
     }, []);
 

@@ -1,9 +1,11 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Link from 'next/link'
 
 const Cards = () => {
   const [data, setData] = useState();
+  const [showmore , setShowMore] = useState(4)
   const [genresData, setGenresData] = useState("");
   // console.log(data);
   let filterdData = data?.filter((val) =>
@@ -57,36 +59,48 @@ const Cards = () => {
             const {
               backdrop_path,
               original_title,
-              overview,
+              // overview,
               first_aired,
               genres,
+              _id
             } = item;
 
             return (
-              <div key={index}>
-                <div className="bg-white text-black rounded-xl shadow-2xl">
-                  <div class="max-w-md rounded overflow-hidden ">
-
-                    <img
-                      class="w-52 p-2 hover:p-1 "
-                      src={backdrop_path}
-                      alt="Sunset in the mountains"
-                    />
-                    <div class="px-6 py-4 items-center">
-                      <div class="font-bold text-lg mb-2 ">
-                        {original_title}
-                        <p className="font-light text-sm"> {first_aired}</p>
-                      </div>
-                      {/* <p class="text-gray-700 text-base"> {overview} </p> */}
-                      <p class="text-gray-700 text-base"> {genres} </p>
-                    </div>
-                  </div>
-                </div>
-            </div>
+              <>
+              {
+               index <= showmore &&  
+               <Link href={`/${_id}`}>
+              
+               <div key={index}>
+                 <div className="bg-white text-black rounded-xl shadow-2xl">
+                   <div class="max-w-md rounded overflow-hidden ">
+ 
+                     <img
+                       class="w-52 p-2 hover:p-1 "
+                       src={backdrop_path}
+                       alt="Sunset in the mountains"
+                     />
+                     <div class="px-6 py-4 items-center">
+                       <div class="font-bold text-lg mb-2 ">
+                         {original_title}
+                         <p className="font-light text-sm"> {first_aired}</p>
+                       </div>
+                       {/* <p class="text-gray-700 text-base"> {overview} </p> */}
+                       <p class="text-gray-700 text-base"> {genres} </p>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+ 
+             </Link>
+              }
+             </>
+            
             );
           })}
 
       </div>
+      <button onClick={() => setShowMore(showmore + 5)}>Show More</button>
     </div>
   );
 };

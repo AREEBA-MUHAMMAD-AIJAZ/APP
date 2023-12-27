@@ -1,10 +1,10 @@
 import Cards from '../component/Cards'
-import Navbar from '../component/Navbar'
+import Caards from '../component/Caards'
 export default function Home() {
   return (
     <div className='bg-white'>
-      {/* <Navbar /> */}
-      <Cards />
+      {/* <Cards /> */}
+      <Caards />
     </div>
   )
 }
